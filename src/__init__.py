@@ -6,6 +6,8 @@ from scipy.integrate import solve_ivp
 import matplotlib.dates as mdates
 from datetime import datetime
 
+################################ Plotting functions  ################################
+
 def plot_windspeeds(t, u, title=None, show=False, xlim=None):
     """
     Plot one or multiple wind speed time series with datetime x-axis.
@@ -57,3 +59,11 @@ def plot_windspeeds(t, u, title=None, show=False, xlim=None):
         plt.show()
 
     return fig, ax
+
+# kilde med forklaring og gennemgang til at lave neural network i python: 
+# https://realpython.com/python-ai-neural-network/ 
+
+
+
+################################ Neural Network Functions  ################################
+
