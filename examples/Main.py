@@ -1,6 +1,7 @@
 
 #Main.py 
 # # Setup
+from ast import In
 from pathlib import Path
 from matplotlib import pyplot as plt
 import numpy as np
@@ -12,6 +13,7 @@ import sys
 
 sys.path.append(str(Path(__file__).parent.parent / 'src'))  # add the 'src' folder to the Python path
 from __init__ import plot_windspeeds
+
 
 
 
@@ -29,16 +31,40 @@ location1_windspeeds_100m = np.loadtxt(wind_loc_1, delimiter=',', skiprows=1, us
 
 df = pd.read_csv(wind_loc_1, parse_dates=[0])
 location1_timestamps = df.iloc[:, 0]
-print(location1_timestamps)  # print the wind speeds to check if they were loaded correctly
+#print(location1_timestamps)  # print the wind speeds to check if they were loaded correctly
 
 
 # Single wind speed
-plot_windspeeds(location1_timestamps, location1_windspeeds_10m, show=True)
+#plot_windspeeds(location1_timestamps, location1_windspeeds_10m, show=True)
 
 # Multiple wind speeds
-plot_windspeeds(location1_timestamps, [location1_windspeeds_10m, location1_windspeeds_100m], show=True)
+#plot_windspeeds(location1_timestamps, [location1_windspeeds_10m, location1_windspeeds_100m], show=True)
 
 
 # TO DO LIST : 
 # CREATE A PLOT FUNCTION  THAT has the correct variables. 
 #Plot timeseries of a selected variable (like wind_speed_100m or Power) for a given site (site 1, 2, 3 or 4) within a specific perid, i.e., a function with variable_name, site_index, starting_time and ending_time as inputs.
+
+
+
+################## Neural Network code to be later put in the 'src' folder and imported in this file ##################
+# documentation for the code below: https://realpython.com/python-ai-neural-network/#making-your-first-prediction
+# documentation for the ReLU activation function: https://www.geeksforgeeks.org/deep-learning/relu-activation-function-in-deep-learning/
+# Wrapping the vectors in NumPy arrays
+input_vector = np.array([1.66, 1.56])
+weights_1 = np.array([1.45, -0.66])
+bias = np.array([0.0])
+
+def ReLu(x):
+    
+    return max(0, x)  # ReLU activation function
+def make_prediction(input_vector, weights, bias):
+    layer_1 = np.dot(input_vector, weights) + bias
+    layer_2 = ReLu(layer_1)
+    return layer_2
+
+prediction = make_prediction(input_vector, weights_1, bias)
+
+print(f"The prediction result is: {prediction}")
+
+
