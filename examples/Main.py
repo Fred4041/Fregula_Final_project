@@ -67,4 +67,20 @@ prediction = make_prediction(input_vector, weights_1, bias)
 
 print(f"The prediction result is: {prediction}")
 
+target_value = 0.5
 
+mse = np.square(prediction - target_value)
+
+print(f"Prediction: {prediction}; Error: {mse}")
+
+derivative = 0.5 * (prediction - target_value)
+
+print(f"Derivative of the error with respect to the prediction: {derivative}")
+
+weights_1 = weights_1 - derivative
+
+prediction = make_prediction(input_vector, weights_1, bias)
+
+error = (prediction - target_value)
+
+print(f"Updated Prediction: {prediction}; Error: {error}")
