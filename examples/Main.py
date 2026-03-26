@@ -7,67 +7,17 @@ import numpy as np
 import pandas as pd
 import matplotlib.dates as mdates
 from datetime import datetime
+import os 
+import sys 
 
+sys.path.append(str(Path(__file__).parent.parent / 'src'))  # add the 'src' folder to the Python path
+from __init__ import plot_windspeeds
 
 
 
 FILE_DIR = Path(__file__).parent  # directory where this file is located 
 DATA_DIR = FILE_DIR.parent / 'inputs'  # get the 'inputs' folder in the same directory as this file 
 
-
-
-#plot_windspeeds(location1_timestamps, [location1_windspeeds_10m], show=True)
-def plot_windspeeds(t, u, title=None, show=False, xlim=None):
-    """
-    Plot one or multiple wind speed time series with datetime x-axis.
-
-    Parameters
-    ----------
-    t : array-like
-        Time array (strings like '2017-01-02 00:00:00' or datetime objects)
-    u : array-like or list of array-like
-        One or multiple wind speed arrays
-    """
-
-    # Convert timestamps to datetime if needed
-    if isinstance(t[0], str):
-        t = [datetime.strptime(ts, "%Y-%m-%d %H:%M:%S") for ts in t]
-
-    fig, ax = plt.subplots(figsize=(9, 4))
-
-    # Ensure u is iterable
-    if isinstance(u, (list, tuple)):
-        wind_arrays = u
-    else:
-        wind_arrays = [u]
-
-    # Plot wind speeds
-    for i, ui in enumerate(wind_arrays):
-        ax.plot(t, ui, label=f"Wind speed {i+1}")
-
-    ax.set_ylabel("Wind speed (m/s)")
-    ax.set_xlabel("Time")
-
-    # Format datetime axis nicely
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d\n%H:%M"))
-    ax.xaxis.set_major_locator(mdates.AutoDateLocator())
-
-    fig.autofmt_xdate()
-
-    # Optional x-limits (must be datetime if used)
-    if xlim is not None:
-        ax.set_xlim(xlim)
-
-    if len(wind_arrays) > 1:
-        ax.legend()
-
-    if title is not None:
-        ax.set_title(title)
-
-    if show:
-        plt.show()
-
-    return fig, ax
 
 
 # We set easier paths for our 'wind_TI_0.1' folder and our 'wind_xx_ms_TI_0.1.txt' files

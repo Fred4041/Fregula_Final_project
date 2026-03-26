@@ -6,7 +6,7 @@ from scipy.integrate import solve_ivp
 import matplotlib.dates as mdates
 from datetime import datetime
 
-def plot_windspeeds2(t, u, title=None, show=False, xlim=None):
+def plot_windspeeds(t, u, title=None, show=False, xlim=None):
     """
     Plot one or multiple wind speed time series with datetime x-axis.
 
